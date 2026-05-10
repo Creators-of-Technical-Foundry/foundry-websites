@@ -1,0 +1,22 @@
+$schema: 'https://moonrepo.dev/schemas/tasks.json'
+
+implicitInputs:
+  - 'static/**/*'
+  - 'static/*'
+  - 'source/**/*'
+  - 'source/*'
+  - 'pages/**/*'
+  - 'pages/*'
+
+tasks:
+  fmt:
+    script: deno fmt
+  install:
+    script: deno install
+  dev:
+    script: deno task dev
+    local: true
+  build:
+    script: deno task build
+  deploy:
+    script: deno task deploy

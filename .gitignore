@@ -1,0 +1,23 @@
+# Systems and Editors
+.idea
+.vscode
+**/.DS_Store
+**/*.iml
+
+# Packages
+**/node_modules
+**/.vite
+**/dist
+
+# Tools
+.moon/cache
+.moon/docker
+**/.env*
+
+# Temporary
+**/*.mrpack
+**/temp/*
+
+# Exceptions
+!**/.gitkeep
+!**/temp
