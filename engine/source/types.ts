@@ -1,4 +1,4 @@
-import type { Component as QwikComponent } from "@builder.io/qwik";
+import type { Component as QwikComponent } from "@qwik.dev/core";
 
 /**
  * Represents a record of a web page with associated metadata.

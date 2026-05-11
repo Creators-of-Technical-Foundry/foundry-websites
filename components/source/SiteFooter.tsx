@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import { component$ } from "@qwik.dev/core";
 
 export const SiteFooter = component$(() => (
     <footer class="text-center text-sm italic my-6 text-neutral-500 opacity-80 flex flex-row justify-between">

@@ -1,4 +1,4 @@
-import { qwikVite } from "@builder.io/qwik/optimizer";
+import { qwikVite  } from  "@qwik.dev/core/optimizer";
 import honoDevServer from "@hono/vite-dev-server";
 import honoSiteGenerator from "@hono/vite-ssg";
 import tailwind from "@tailwindcss/vite";
@@ -41,7 +41,7 @@ export function siteConfig(config: SiteConfig) {
             qwikVite({
                 srcDir: engineDir,
                 client: {
-                    devInput: 'entry.dev.tsx',
+                    input: 'entry.dev.tsx',
                 },
                 ssr: {
                     input: 'entry.ssr.tsx',
@@ -66,5 +66,8 @@ export function siteConfig(config: SiteConfig) {
                 strict: false,
             },
         },
+        ssr: {
+            noExternal: ['@qwik.dev/devtools'],
+        }
     });
 }

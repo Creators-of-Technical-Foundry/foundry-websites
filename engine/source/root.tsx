@@ -1,5 +1,5 @@
-import type { Component, Signal } from "@builder.io/qwik";
-import { component$, createContextId, Slot, useContextProvider, useSignal } from "@builder.io/qwik";
+import type { Component, Signal } from "@qwik.dev/core";
+import { component$, createContextId, Slot, useContextProvider, useSignal } from "@qwik.dev/core";
 
 export type DocumentRootProps = {
     Head?: Component;

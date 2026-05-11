@@ -1,4 +1,4 @@
-import { component$, useContext } from "@builder.io/qwik";
+import { component$, useContext } from "@qwik.dev/core";
 import { DocumentContext } from "@foundry/website/server";
 
 export type SiteToolbarProps = {
@@ -25,7 +25,7 @@ export const SiteToolbar = component$<SiteToolbarProps>((props) => {
 
             ))}
             <div class="grow"></div>
-            <button type="button">
+            <button type="button" onClick$={() => documentState.theme.value = documentState.theme.value === 'light' ? 'dark' : 'light'}>
                 {documentState.theme.value}
             </button>
         </nav>

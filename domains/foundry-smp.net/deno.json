@@ -2,9 +2,5 @@
     "tasks": {
         "build": "vite build",
         "dev": "vite dev"
-    },
-    "imports": {
-        "@builder.io/qwik": "npm:@builder.io/qwik@latest",
-        "vite": "npm:vite@latest"
     }
 }

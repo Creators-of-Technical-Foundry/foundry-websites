@@ -6,12 +6,13 @@
         "./domains/foundry-smp.net"
     ],
     "imports": {
-        "@builder.io/qwik": "npm:@builder.io/qwik@latest",
-        "vite": "npm:vite@latest"
+        "@qwik.dev/core": "npm:@qwik.dev/core@beta",
+        "vite": "npm:vite@7.3.3"
     },
+    "allowScripts": ["npm:esbuild@0.27.7", "npm:sharp@0.34.5"],
     "compilerOptions": {
         "jsx": "react-jsx",
-        "jsxImportSource": "@builder.io/qwik",
+        "jsxImportSource": "@qwik.dev/core",
         "lib": [
             "dom",
             "dom.asynciterable",
