@@ -1,0 +1,16 @@
+{
+    "version": "0.1.0",
+    "name": "@foundry/website",
+    "exports": {
+        "./config": "./source/config.ts",
+        "./server": "./source/server.ts"
+    },
+    "imports": {
+        "@hono/vite-dev-server": "npm:@hono/vite-dev-server@latest",
+        "@hono/vite-ssg": "npm:@hono/vite-ssg@latest",
+        "hono": "npm:hono@latest",
+        "@tailwindcss/typography": "npm:@tailwindcss/typography@latest",
+        "@tailwindcss/vite": "npm:@tailwindcss/vite@latest",
+        "tailwindcss": "npm:tailwindcss@latest"
+    }
+}

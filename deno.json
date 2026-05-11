@@ -1,0 +1,29 @@
+{
+    "nodeModulesDir": "auto",
+    "workspace": [
+        "./engine",
+        "./components",
+        "./domains/foundry-smp.net"
+    ],
+    "imports": {
+        "@builder.io/qwik": "npm:@builder.io/qwik@latest",
+        "vite": "npm:vite@latest"
+    },
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "@builder.io/qwik",
+        "lib": [
+            "dom",
+            "dom.asynciterable",
+            "dom.iterable",
+            "deno.ns"
+        ],
+        "types": [
+            "vite/client"
+        ]
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "lineWidth": 120
+    }
+}
