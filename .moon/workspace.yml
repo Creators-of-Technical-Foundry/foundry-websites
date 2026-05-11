@@ -1,6 +1,11 @@
 # https://moonrepo.dev/docs/config/workspace
-$schema: './cache/schemas/workspace.json'
+$schema: "./cache/schemas/workspace.json"
+
+vcs:
+    defaultBranch: dev
+    provider: github
+    manager: git
 
 projects:
-  - 'engine'
-  - 'domains/*'
+    - "engine"
+    - "domains/*"
