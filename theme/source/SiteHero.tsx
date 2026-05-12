@@ -6,12 +6,9 @@ export type SiteHeroProps = {
 };
 
 export const SiteHero = component$<SiteHeroProps>(({ title, line }) => (
-    <header
-        class="h-32 lg:h-80 px-24 grid grid-cols-1 sm:grid-cols-2 auto-rows-min"
-        q:slot="header"
-    >
-        <hgroup class="relative z-80 flex flex-col items-start justify-center">
-            <h1 class="w-full text-4xl mt-24 lg:mt-12 text-foundry-500 font-bold">
+    <header class="h-32 lg:h-60 px-24 pt-12 grid grid-cols-1 sm:grid-cols-2 auto-rows-min text-foundry-100 text-shadow-foundry-800 dark:text-foundry-500 dark:text-shadow-foundry-50">
+        <hgroup class="relative z-60 flex flex-col items-start justify-center">
+            <h1 class="w-full text-4xl mt-24 lg:mt-12 font-bold">
                 {title ?? "Technical Foundry"}
             </h1>
             <h2 class="w-full italic mt-2 text-md">
@@ -20,7 +17,7 @@ export const SiteHero = component$<SiteHeroProps>(({ title, line }) => (
         </hgroup>
         <hgroup class="grow relative z-50 flex justify-center justify-items-end items-center hidden lg:block">
             <img
-                class="h-60 w-60 drop-shadow-2xl drop-shadow-foundry-300"
+                class="h-60 w-60 drop-shadow-2xl drop-shadow-foundry-700 dark:drop-shadow-foundry-300"
                 src="/logo-icon.png"
                 alt="The Foundry SMP"
             />

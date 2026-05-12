@@ -28,7 +28,7 @@ export default component$<DocumentRootProps>((props) => {
                 <link rel="stylesheet" href="/assets/styles.css" />
                 <Head />
             </head>
-            <body data-theme={documentState.theme.value}>
+            <body data-theme={documentState.theme.value ?? 'dark'}>
                 <Slot />
             </body>
         </>

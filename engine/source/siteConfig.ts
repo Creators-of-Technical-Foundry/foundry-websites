@@ -1,4 +1,4 @@
-import { qwikVite  } from  "@qwik.dev/core/optimizer";
+import { qwikVite } from "@qwik.dev/core/optimizer";
 import honoDevServer from "@hono/vite-dev-server";
 import honoSiteGenerator from "@hono/vite-ssg";
 import tailwind from "@tailwindcss/vite";
@@ -32,8 +32,12 @@ export function siteConfig(config: SiteConfig) {
                     replacement: engineDir + "/server.ts",
                 },
                 {
-                    find: "@foundry/components",
-                    replacement: rootDir + "/components/source/index.ts",
+                    find: "@foundry/modules",
+                    replacement: rootDir + "/modules/source/index.ts",
+                },
+                {
+                    find: "@foundry/theme",
+                    replacement: rootDir + "/theme/source/index.ts",
                 },
             ],
         },
@@ -41,10 +45,10 @@ export function siteConfig(config: SiteConfig) {
             qwikVite({
                 srcDir: engineDir,
                 client: {
-                    input: 'entry.dev.tsx',
+                    input: "entry.dev.tsx",
                 },
                 ssr: {
-                    input: 'entry.ssr.tsx',
+                    input: "entry.ssr.tsx",
                 },
             }),
             honoSiteGenerator({ entry }),
@@ -67,7 +71,7 @@ export function siteConfig(config: SiteConfig) {
             },
         },
         ssr: {
-            noExternal: ['@qwik.dev/devtools'],
-        }
+            noExternal: ["@qwik.dev/devtools"],
+        },
     });
 }

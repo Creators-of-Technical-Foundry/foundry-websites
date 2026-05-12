@@ -6,7 +6,7 @@ export const SiteFooter = component$(() => (
             made by <a href="https://github.com/adaliszk" target="_blank">Kicsivazz</a> using Qwik with Hono
         </p>
         <p>
-            last updated on <time class="text-xs">##LAST_UPDATE##</time>
+            copyright &copy; 2025-2026 the Foundry team
         </p>
     </footer>
 ));

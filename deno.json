@@ -2,10 +2,13 @@
     "nodeModulesDir": "auto",
     "workspace": [
         "./engine",
-        "./components",
-        "./domains/foundry-smp.net"
+        "./theme",
+        "./modules",
+        "./domains/foundry-smp.net",
+        "./domains/foundry-modpack.link"
     ],
     "imports": {
+        "@adaliszk/std": "npm:@adaliszk/std@latest",
         "@qwik.dev/core": "npm:@qwik.dev/core@beta",
         "vite": "npm:vite@7.3.3"
     },

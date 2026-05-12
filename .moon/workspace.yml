@@ -8,4 +8,6 @@ vcs:
 
 projects:
     - "engine"
+    - "theme"
+    - "modules"
     - "domains/*"

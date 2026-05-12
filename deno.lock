@@ -1,16 +1,27 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@adaliszk/std@latest": "0.4.0",
     "npm:@hono/vite-dev-server@latest": "0.25.3_hono@4.12.18",
     "npm:@hono/vite-ssg@latest": "0.3.3_hono@4.12.18",
     "npm:@qwik.dev/core@beta": "2.0.0-beta.34_vite@7.3.3__picomatch@4.0.4__yaml@2.8.4",
     "npm:@tailwindcss/typography@latest": "0.5.19_tailwindcss@4.3.0",
     "npm:@tailwindcss/vite@latest": "4.3.0_vite@7.3.3__picomatch@4.0.4__yaml@2.8.4",
     "npm:hono@latest": "4.12.18",
+    "npm:tailwind-merge@latest": "3.3.1",
     "npm:tailwindcss@latest": "4.3.0",
     "npm:vite@7.3.3": "7.3.3_picomatch@4.0.4_yaml@2.8.4"
   },
   "npm": {
+    "@adaliszk/std@0.4.0": {
+      "integrity": "sha512-JJP++hk+xIPIe0qtV9bfpBxHUBJQs5gphimUYa5PGUT6eT0q/8lN8xGsgBqX2zBy/mtN8W/dv0s9gsJw4nUlRA==",
+      "dependencies": [
+        "@total-typescript/ts-reset",
+        "option-t",
+        "ulid",
+        "zod"
+      ]
+    },
     "@esbuild/aix-ppc64@0.27.7": {
       "integrity": "sha512-EKX3Qwmhz1eMdEJokhALr0YiD0lhQNwDqkPYyPhiSwKrh7/4KRjQc04sZ8db+5DVVnZ1LmbNDI1uAMPEUBnQPg==",
       "os": ["aix"],
@@ -431,6 +442,9 @@
         "vite"
       ]
     },
+    "@total-typescript/ts-reset@0.5.1": {
+      "integrity": "sha512-AqlrT8YA1o7Ff5wPfMOL0pvL+1X+sw60NN6CcOCqs658emD6RfiXhF7Gu9QcfKBH7ELY2nInLhKSCWVoNL70MQ=="
+    },
     "@types/estree@1.0.8": {
       "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="
     },
@@ -614,6 +628,9 @@
       "integrity": "sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==",
       "bin": true
     },
+    "option-t@43.2.1": {
+      "integrity": "sha512-6BiDgQkhNWga3W8JZHXlTrS0PoySSvfiBbZRDJtJwuxHlUDhHsy5Qzf9rz1mJ6P2+6p3Fle7CIGCtNpjRJQcaA=="
+    },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
     },
@@ -676,6 +693,9 @@
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
     },
+    "tailwind-merge@3.3.1": {
+      "integrity": "sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g=="
+    },
     "tailwindcss@4.3.0": {
       "integrity": "sha512-y6nxMGB1nMW9R6k96e5gdIFzcfL/gTJRNaqGes1YvkLnPVXzWgbqFF2yLC0T8G774n24cx3Pe8XrKoniCOAH+Q=="
     },
@@ -688,6 +708,10 @@
         "fdir",
         "picomatch"
       ]
+    },
+    "ulid@2.4.0": {
+      "integrity": "sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==",
+      "bin": true
     },
     "util-deprecate@1.0.2": {
       "integrity": "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="
@@ -714,10 +738,14 @@
     "yaml@2.8.4": {
       "integrity": "sha512-ml/JPOj9fOQK8RNnWojA67GbZ0ApXAUlN2UQclwv2eVgTgn7O9gg9o7paZWKMp4g0H3nTLtS9LVzhkpOFIKzog==",
       "bin": true
+    },
+    "zod@3.25.76": {
+      "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     }
   },
   "workspace": {
     "dependencies": [
+      "npm:@adaliszk/std@latest",
       "npm:@qwik.dev/core@beta",
       "npm:vite@7.3.3"
     ],
@@ -730,6 +758,11 @@
           "npm:@tailwindcss/vite@latest",
           "npm:hono@latest",
           "npm:tailwindcss@latest"
+        ]
+      },
+      "theme": {
+        "dependencies": [
+          "npm:tailwind-merge@latest"
         ]
       }
     }
