@@ -1,0 +1,6 @@
+platform: deno
+language: typescript
+dependsOn:
+  - "engine"
+  - "theme"
+  - "modules"
