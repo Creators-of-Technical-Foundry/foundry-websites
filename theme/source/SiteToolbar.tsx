@@ -13,7 +13,7 @@ export type SiteToolbarProps = {
 export const SiteToolbar = component$<SiteToolbarProps>((props) => {
     const documentState = useContext(DocumentContext);
     return (
-        <nav class="w-9/10 xl:w-6xl fixed top-0 left-1/2 -translate-x-[50%] h-18 z-150 flex flex-row gap-3 mx-5 justify-between items-center">
+        <nav class="w-11/12 mx-auto xl:w-6xl fixed top-0 left-1/2 -translate-x-[50%] h-18 z-150 flex flex-row gap-3 justify-between items-center">
             <a href="/" class="flex flex-row gap-3 items-center  text-foundry-50 dark:text-foundry-700 font-medium">
                 <img width={32} height={32} src="/logo-favicon.png" alt="C:TF" />
                 <span class="inline-block ml-2">{props.homeLabel ?? "Foundry"}</span>
