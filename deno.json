@@ -1,35 +1,34 @@
 {
-    "nodeModulesDir": "auto",
-    "workspace": [
-        "./engine",
-        "./theme",
-        "./modules",
-        "./domains/foundry-smp.net",
-        "./domains/foundry-modpack.link"
-    ],
+    "version": "0.1.0",
+    "name": "@foundry/engine",
+    "exports": "./source/engine.ts",
     "imports": {
-        "@adaliszk/std": "npm:@adaliszk/std@latest",
         "@qwik.dev/core": "npm:@qwik.dev/core@beta",
-        "@hono/hono": "jsr:@hono/hono@4.12.18",
-        "vite": "npm:vite@7.3.3"
+        "@lume/cli": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/cli.ts",
+        "@lume/core": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/mod.ts",
+        "@lume/types": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/types.ts",
+        "@lume/tailwindcss": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/tailwindcss.ts",
+        "@lume/jsx": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/jsx.ts",
+        "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts"
     },
-    "allowScripts": ["npm:esbuild@0.27.7", "npm:sharp@0.34.5"],
+    "nodeModulesDir": "auto",
     "compilerOptions": {
-        "jsx": "preserve",
-        "jsxFragmentFactory": "Fragment",
-        "jsxImportSource": "@hono/hono/jsx",
+        "jsx": "react-jsx",
+        "jsxImportSource": "lume",
+        "types": ["@lume/types"],
         "lib": [
             "dom",
             "dom.asynciterable",
             "dom.iterable",
             "deno.ns"
-        ],
-        "types": [
-            "vite/client"
         ]
     },
     "fmt": {
         "indentWidth": 4,
-        "lineWidth": 120
-    }
+        "lineWidth": 120,
+        "exclude": ["*.yml", "**/*.yml"]
+    },
+    "workspace": [
+        "./foundry-smp.net"
+    ]
 }

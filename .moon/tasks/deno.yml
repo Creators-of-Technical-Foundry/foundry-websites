@@ -1,22 +1,29 @@
 $schema: "https://moonrepo.dev/schemas/tasks.json"
 
 implicitInputs:
-    - "static/**/*"
-    - "static/*"
-    - "source/**/*"
-    - "source/*"
-    - "pages/**/*"
-    - "pages/*"
+  - "assets/**/*"
+  - "assets/*"
+  - "source/**/*"
+  - "source/*"
+
+implicitDeps:
+  - "repo:up"
 
 tasks:
-    fmt:
-        script: deno fmt
-    install:
-        script: deno install
-    dev:
-        script: deno task dev
-        local: true
-    build:
-        script: deno task build
-    deploy:
-        script: deno task deploy
+  fmt:
+    extends: "exec"
+    args: deno fmt
+  install:
+    inputs: [ "deno.json", "deno.lock" ]
+    extends: "exec"
+    args: deno install
+  dev:
+    extends: "exec"
+    args: deno task dev
+    local: true
+  build:
+    extends: "exec"
+    args: deno task build
+  deploy:
+    extends: "exec"
+    args: deno task deploy

@@ -1,0 +1,13 @@
+name: "foundry-websites"
+
+services:
+  data:
+    image: surrealdb/surrealdb:latest
+    command: start --user foundry --pass foundry memory
+    ports: [ "8000:8000/tcp", "8000:8000/udp" ]
+
+  repo:
+    ports: [ "8080:8080/tcp" ]
+    command: tail -f /dev/null
+    volumes: [ ".:/srv" ]
+    build: .

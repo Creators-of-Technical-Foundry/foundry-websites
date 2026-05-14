@@ -1,0 +1,6 @@
+{
+    "tasks": {
+        "build": "lume",
+        "dev": "lume --serve"
+    }
+}

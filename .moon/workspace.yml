@@ -2,12 +2,10 @@
 $schema: "./cache/schemas/workspace.json"
 
 vcs:
-    defaultBranch: dev
-    provider: github
-    manager: git
+  defaultBranch: dev
+  provider: github
+  manager: git
 
 projects:
-    - "engine"
-    - "theme"
-    - "modules"
-    - "domains/*"
+  - "."
+  - "foundry-smp.net"

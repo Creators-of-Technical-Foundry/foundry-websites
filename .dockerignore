@@ -1,0 +1,10 @@
+.git
+.git*
+
+.idea
+.vscode
+.moon
+
+node_modules
+temp
+*.log

@@ -1,0 +1,18 @@
+$schema: "./cache/schemas/project.json"
+
+id: repo
+
+tasks:
+  lume-binary:
+    local: true
+    script: |
+      cat > ./node_modules/.bin/lume <<'EOF'
+      #!/bin/sh
+      deno run --config ${workspaceRoot:-/srv}/deno.json --allow-all @lume/cli --config=lume.ts "$@"
+      EOF
+      chmod +x ./node_modules/.bin/lume
+  init:
+    local: true
+    script: |
+      moon repo:install
+      moon repo:lume-binary
