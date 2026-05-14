@@ -6,9 +6,6 @@ implicitInputs:
   - "source/**/*"
   - "source/*"
 
-implicitDeps:
-  - "repo:up"
-
 tasks:
   fmt:
     extends: "exec"
