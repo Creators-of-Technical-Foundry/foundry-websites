@@ -21,6 +21,9 @@ tasks:
   build:
     extends: "exec"
     args: deno task build
+  preview:
+    extends: "exec"
+    args: deno task preview
   deploy:
     extends: "exec"
     args: deno task deploy

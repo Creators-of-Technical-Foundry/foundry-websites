@@ -6,4 +6,5 @@ tasks:
   init:
     local: true
     script: |
+      moon repo:up
       moon repo:install

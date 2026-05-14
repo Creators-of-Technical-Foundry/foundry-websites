@@ -1,0 +1,7 @@
+{
+    "name": "@foundry/theme",
+    "exports": "./index.ts",
+    "imports": {
+        "@tailwindcss/merge": "npm:tailwind-merge@latest"
+    }
+}
