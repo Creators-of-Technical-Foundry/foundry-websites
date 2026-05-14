@@ -1,26 +1,34 @@
-import type { ResolvedPage } from "./types.ts";
-import type { Context } from "hono";
+import type { HonoComponent, PageComponent } from "./types.ts";
+import { QWIK_LOADER } from '@qwik.dev/core/loader';
+import type { Context } from "@hono/hono";
+import stylesPath from "./styles.css?url";
 
-import { component$ } from "@qwik.dev/core";
+// noinspection HtmlRequiredTitleElement - Expected to be hoisted fomr childrens
+export const DefaultLayout: HonoComponent = ({ children }) => (
+    <html lang="en">
+        <head>
+            <meta charSet="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="stylesheet" href={stylesPath} />
 
-// import {isDev} from "@qwik.dev/core/build";
-import { renderToString } from "@qwik.dev/core/server";
-import DocumentRoot from "./root.tsx";
+        </head>
+        <body data-theme="dark">
+            {children}
+        </body>
+    </html>
+);
 
 // noinspection JSUnusedGlobalSymbols - Used by the Domains
-export function renderPage(
-    PendingPage: Promise<ResolvedPage>,
-): (context: Context) => Promise<Response> {
+export function renderPage(pending: Promise<PageComponent>) {
     return async (context: Context) => {
-        const Page = await PendingPage;
-        const PageHead = Page.Head ?? component$(() => <title>Test</title>);
+        const params = context.req.param();
+        const { default: Content } = (await pending) as PageComponent<typeof params>;
+        const Layout = (context.getLayout() ?? DefaultLayout) as HonoComponent;
 
-        return context.html(
-            (await renderToString(
-                <DocumentRoot Head={PageHead}>
-                    <Page.Body />
-                </DocumentRoot>,
-            )).html,
-        );
+        return (await context.html(
+            <Layout>
+                <Content {...params} url={context.req.url} />
+            </Layout>
+        ));
     };
 }

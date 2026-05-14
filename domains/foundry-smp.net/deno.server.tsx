@@ -3,7 +3,7 @@
  * outside the browser, this entry point used by the build process.
  */
 
-import { Hono, renderPage } from "@foundry/website/server";
+import { Hono, renderPage } from "@foundry/engine/server";
 
 const app = new Hono();
 app.get("/", renderPage(import("./pages/home.page.tsx")));

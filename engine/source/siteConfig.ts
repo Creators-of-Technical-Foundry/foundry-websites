@@ -23,38 +23,19 @@ export function siteConfig(config: SiteConfig) {
         root: domainDir,
         resolve: {
             alias: [
-                {
-                    find: "@foundry/website/config",
-                    replacement: engineDir + "/config.ts",
-                },
-                {
-                    find: "@foundry/website/server",
-                    replacement: engineDir + "/server.ts",
-                },
-                {
-                    find: "@foundry/modules",
-                    replacement: rootDir + "/modules/source/index.ts",
-                },
-                {
-                    find: "@foundry/theme",
-                    replacement: rootDir + "/theme/source/index.ts",
-                },
+                { find: "@foundry/engine/config", replacement: engineDir + "/config.ts" },
+                { find: "@foundry/engine/server", replacement: engineDir + "/server.ts" },
+                { find: "@foundry/modules", replacement: rootDir + "/modules/source/index.ts" },
+                { find: "@foundry/theme", replacement: rootDir + "/theme/source/index.ts" },
             ],
         },
         plugins: [
-            qwikVite({
-                srcDir: engineDir,
-                client: {
-                    input: "entry.dev.tsx",
-                },
-                ssr: {
-                    input: "entry.ssr.tsx",
-                },
-            }),
             honoSiteGenerator({ entry }),
-            honoDevServer({
-                injectClientScript: true,
-                entry,
+            honoDevServer({ entry }),
+            qwikVite({
+                client: { input: engineDir + '/qwik.client.tsx' },
+                ssr: { input: engineDir + '/qwik.server.tsx' },
+                srcDir: engineDir,
             }),
             tailwind(),
         ],
@@ -69,9 +50,6 @@ export function siteConfig(config: SiteConfig) {
                 allow: [engineDir, domainDir],
                 strict: false,
             },
-        },
-        ssr: {
-            noExternal: ["@qwik.dev/devtools"],
         },
     });
 }

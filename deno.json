@@ -10,12 +10,14 @@
     "imports": {
         "@adaliszk/std": "npm:@adaliszk/std@latest",
         "@qwik.dev/core": "npm:@qwik.dev/core@beta",
+        "@hono/hono": "jsr:@hono/hono@4.12.18",
         "vite": "npm:vite@7.3.3"
     },
     "allowScripts": ["npm:esbuild@0.27.7", "npm:sharp@0.34.5"],
     "compilerOptions": {
-        "jsx": "react-jsx",
-        "jsxImportSource": "@qwik.dev/core",
+        "jsx": "preserve",
+        "jsxFragmentFactory": "Fragment",
+        "jsxImportSource": "@hono/hono/jsx",
         "lib": [
             "dom",
             "dom.asynciterable",

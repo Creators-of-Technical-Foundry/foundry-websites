@@ -1,16 +1,21 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@hono/hono@4.12.18": "4.12.18",
     "npm:@adaliszk/std@latest": "0.4.0",
     "npm:@hono/vite-dev-server@latest": "0.25.3_hono@4.12.18",
     "npm:@hono/vite-ssg@latest": "0.3.3_hono@4.12.18",
-    "npm:@qwik.dev/core@beta": "2.0.0-beta.34_vite@7.3.3__picomatch@4.0.4__yaml@2.8.4",
+    "npm:@qwik.dev/core@beta": "2.0.0-beta.34_vite@7.3.3__picomatch@4.0.4",
     "npm:@tailwindcss/typography@latest": "0.5.19_tailwindcss@4.3.0",
-    "npm:@tailwindcss/vite@latest": "4.3.0_vite@7.3.3__picomatch@4.0.4__yaml@2.8.4",
-    "npm:hono@latest": "4.12.18",
+    "npm:@tailwindcss/vite@latest": "4.3.0_vite@7.3.3__picomatch@4.0.4",
     "npm:tailwind-merge@latest": "3.3.1",
     "npm:tailwindcss@latest": "4.3.0",
-    "npm:vite@7.3.3": "7.3.3_picomatch@4.0.4_yaml@2.8.4"
+    "npm:vite@7.3.3": "7.3.3_picomatch@4.0.4"
+  },
+  "jsr": {
+    "@hono/hono@4.12.18": {
+      "integrity": "854fd0628abd7703a1583807f1ae8f99399604b9452b6a2a777fd3e097977b8c"
+    }
   },
   "npm": {
     "@adaliszk/std@0.4.0": {
@@ -199,7 +204,7 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
-    "@qwik.dev/core@2.0.0-beta.34_vite@7.3.3__picomatch@4.0.4__yaml@2.8.4": {
+    "@qwik.dev/core@2.0.0-beta.34_vite@7.3.3__picomatch@4.0.4": {
       "integrity": "sha512-6NW9RjOXrq50tZvy5TeW2Xzb8aMFDetr3Uo40Tq0+PmncufsXtcAqX9MhVFDyOzJ8Q2S1Iz5OGGj02MI9Gu/dw==",
       "dependencies": [
         "@qwik.dev/optimizer",
@@ -433,7 +438,7 @@
         "tailwindcss"
       ]
     },
-    "@tailwindcss/vite@4.3.0_vite@7.3.3__picomatch@4.0.4__yaml@2.8.4": {
+    "@tailwindcss/vite@4.3.0_vite@7.3.3__picomatch@4.0.4": {
       "integrity": "sha512-t6J3OrB5Fc0ExuhohouH0fWUGMYL6PTLhW+E7zIk/pdbnJARZDCwjBznFnkh5ynRnIRSI4YjtTH0t6USjJISrw==",
       "dependencies": [
         "@tailwindcss/node",
@@ -716,7 +721,7 @@
     "util-deprecate@1.0.2": {
       "integrity": "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="
     },
-    "vite@7.3.3_picomatch@4.0.4_yaml@2.8.4": {
+    "vite@7.3.3_picomatch@4.0.4": {
       "integrity": "sha512-/4XH147Ui7OGTjg3HbdWe5arnZQSbfuRzdr9Ec7TQi5I7R+ir0Rlc9GIvD4v0XZurELqA035KVXJXpR61xhiTA==",
       "dependencies": [
         "esbuild",
@@ -724,19 +729,11 @@
         "picomatch",
         "postcss",
         "rollup",
-        "tinyglobby",
-        "yaml"
+        "tinyglobby"
       ],
       "optionalDependencies": [
         "fsevents"
       ],
-      "optionalPeers": [
-        "yaml"
-      ],
-      "bin": true
-    },
-    "yaml@2.8.4": {
-      "integrity": "sha512-ml/JPOj9fOQK8RNnWojA67GbZ0ApXAUlN2UQclwv2eVgTgn7O9gg9o7paZWKMp4g0H3nTLtS9LVzhkpOFIKzog==",
       "bin": true
     },
     "zod@3.25.76": {
@@ -745,6 +742,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@hono/hono@4.12.18",
       "npm:@adaliszk/std@latest",
       "npm:@qwik.dev/core@beta",
       "npm:vite@7.3.3"
@@ -756,7 +754,6 @@
           "npm:@hono/vite-ssg@latest",
           "npm:@tailwindcss/typography@latest",
           "npm:@tailwindcss/vite@latest",
-          "npm:hono@latest",
           "npm:tailwindcss@latest"
         ]
       },

@@ -1,22 +1,19 @@
-import { component$ } from "@foundry/website/server";
-import { Article, SiteFooter, SiteHero, SiteToolbar } from "@foundry/theme";
+import { fragment } from "@foundry/engine/server";
+import { Main, Article, SiteFooter, SiteHero, SiteToolbar } from "@foundry/theme";
 import SiteLinks from "../deno.topnav.ts";
 
-export const Head = component$(() => (
-    <>
-        <title>Create: Technical Foundry</title>
-    </>
-));
+export default fragment(function HomePage(params) {
+    console.log('~~~ Home.page.tsx called!', params);
 
-export const Body = component$(() => {
     return (
         <>
+            <title>Create: Technical Foundry</title>
             <SiteToolbar homeLabel="SMP" links={SiteLinks} />
             <SiteHero
                 title="Technical Foundry"
                 line="Engineering aesthetic factories with the Create Mod"
             />
-            <main class="relative z-80 h-full grow mt-24 px-6 flex-col flex-wrap space-y-4">
+            <Main>
                 <section class="grid grid-cols-3 grid-rows-1 gap-4">
                     <Article>
                         <h3 class="font-bold text-lg">Modpack</h3>
@@ -35,7 +32,7 @@ export const Body = component$(() => {
                 </section>
                 <section class="grid grid-cols-3 gap-4">
                 </section>
-            </main>
+            </Main>
             <SiteFooter />
         </>
     );

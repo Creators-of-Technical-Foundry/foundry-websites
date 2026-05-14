@@ -1,10 +1,10 @@
-import { type QwikIntrinsicElements, component$, Slot } from "@qwik.dev/core";
+import { type JSX, type PropsWithChildren, fragment } from "@foundry/engine/server";
 import { twMerge } from "tailwind-merge";
 
-export type MainProps = QwikIntrinsicElements["main"];
+export type MainProps = JSX.IntrinsicElements["main"] & PropsWithChildren;
 
 // noinspection JSUnusedGlobalSymbols - Used by Domains
-export const Main = component$<MainProps>(({ class: classList, ...props }) => {
+export const Main = fragment<MainProps>(({ children, class: classList, ...props }) => {
     const styles = twMerge(
         "w-11/12 mx-auto relative z-80 h-full grow mt-24 px-6 flex-col flex-wrap space-y-4",
         classList?.toString(),
@@ -12,7 +12,7 @@ export const Main = component$<MainProps>(({ class: classList, ...props }) => {
 
     return (
         <main class={styles} {...props}>
-            <Slot />
+            {children}
         </main>
     );
 });
