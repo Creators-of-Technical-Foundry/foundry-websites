@@ -8,9 +8,12 @@
     "@lume/cli": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/cli.ts",
     "@lume/core": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/mod.ts",
     "@lume/types": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/types.ts",
-    "@lume/tailwindcss": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/tailwindcss.ts",
     "@lume/jsx": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/jsx.ts",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts"
+    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
+    "@lume/tailwindcss": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/tailwindcss.ts",
+    "@lume/picture": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/picture.ts",
+    "@lume/transform-images": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/transform_images.ts",
+    "@lume/minify-html": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/minify_html.ts"
   },
   "allowScripts": [
     "npm:esbuild@0.27.3",

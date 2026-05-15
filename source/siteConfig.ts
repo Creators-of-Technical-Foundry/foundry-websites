@@ -1,6 +1,8 @@
 import lume from "@lume/core";
 import tailwindcss from "@lume/tailwindcss";
-// import mdx from "lume/plugins/mdx.ts";
+import picture from "@lume/picture";
+import transformImages from "@lume/transform-images";
+import minifyHTML from "@lume/minify-html";
 import jsx from "@lume/jsx";
 
 export type SiteConfig = {
@@ -9,7 +11,7 @@ export type SiteConfig = {
 };
 
 // TODO: Figure out a better solution than using node compatibility
-import * as fs from 'node:fs/promises';
+import * as fs from "node:fs/promises";
 const themeFiles = await Array.fromAsync(fs.glob("../theme/**/*.tsx"));
 
 // noinspection JSUnusedGlobalSymbols - Used by the website domains
@@ -19,24 +21,29 @@ export function defineWebsite(config: SiteConfig) {
         includes: "./templates",
         src: "./source",
         server: {
-            hostname: '0.0.0.0',
+            hostname: "0.0.0.0",
             port: 8080,
         },
         watcher: {
             include: themeFiles,
-        }
+        },
     });
 
+    // Global Settings
     site.data("layout", "layout.tsx");
-    site.data("domain", `https://${config.domain ?? 'localhost'}`);
-    site.add('assets');
-
+    site.data("domain", `https://${config.domain ?? "localhost"}`);
     for (const [key, value] of Object.entries(config.serverData ?? {})) {
         site.data(key, value);
     }
 
+    // Handle Assets
+    site.use(picture())
+        .use(transformImages())
+        .add("assets");
+
+    // Rendering
     site.use(tailwindcss({ minify: true })).add("styles.css");
-    site.use(jsx());
+    site.use(jsx()).use(minifyHTML());
 
     return site;
 }

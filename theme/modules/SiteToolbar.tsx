@@ -21,13 +21,13 @@ export const SiteToolbarLink = component<JSX.IntrinsicElements["a"]>(({children,
 export const SiteToolbar = component<SiteToolbarProps>(({homeLabel, links, class: classList}) => {
     return (
         <nav class={twMerge(
-            "sticky top-0 left-0 right-0 z-150 w-full p-1 mb-6",
+            "relative top-0 left-0 right-0 z-150 w-full p-1 mb-6",
             "bg-foundry-100/70",
             classList?.toString(),
         )}>
             <div class="h-18 my-1 w-full xl:w-6xl mx-auto flex flex-row gap-3 justify-between items-center">
                 <SiteToolbarLink href="/" class="flex flex-row gap-3 items-center mr-24">
-                    <img class="h-14" src="/assets/logo-title.png" alt="C:TF"/>
+                    <img class="h-14" src="/assets/logo-title.png" alt="C:TF" transform-images="avif webp jpg 156@2"  />
                 </SiteToolbarLink>
                 <SiteToolbarLink href="/">{homeLabel ?? "Foundry"}</SiteToolbarLink>
                 {(links ?? []).map((link) => (

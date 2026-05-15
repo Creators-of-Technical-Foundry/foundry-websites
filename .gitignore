@@ -17,6 +17,8 @@
 
 # Temporary
 **/*.mrpack
+**/.wrangler
+**/_cache
 **/temp/*
 
 # Exceptions

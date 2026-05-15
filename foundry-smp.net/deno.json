@@ -2,7 +2,7 @@
     "tasks": {
         "build": "deno -A @lume/cli --config=lume.ts",
         "dev": "deno -A @lume/cli --config=lume.ts --serve",
-        "preview": "deno -A @cloudflare/wrangler deploy ./build --project-name=foundry-smp-preview",
-        "deploy": "deno -A @cloudflare/wrangler deploy ./build --project-name=foundry-smp"
+        "preview": "deno -A @cloudflare/wrangler pages deploy ./build --project-name=www-foundry-smp --branch=preview",
+        "deploy": "deno -A @cloudflare/wrangler pages deploy ./build --project-name=www-foundry-smp"
     }
 }

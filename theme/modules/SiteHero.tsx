@@ -8,7 +8,7 @@ export type SiteHeroProps = JSX.IntrinsicElements["header"] & {
 
 export const SiteHero = component<SiteHeroProps>(({ title, line, class: classList }) => (
     <header class={twMerge(
-        "w-full xl:w-6xl mx-auto h-32 lg:h-60 grid grid-cols-1 sm:grid-cols-2 auto-rows-min",
+        "w-10/12 xl:w-6xl mx-auto h-32 lg:h-60 grid grid-cols-1 sm:grid-cols-2 auto-rows-min",
         "text-foundry-100 text-shadow-foundry-800 dark:text-foundry-500 dark:text-shadow-foundry-50",
         classList?.toString(),
     )}>
@@ -20,12 +20,15 @@ export const SiteHero = component<SiteHeroProps>(({ title, line, class: classLis
                 {line ?? "Engineering and Artistry with the CreateMod on Minecraft"}
             </h2>
         </hgroup>
-        <hgroup class="grow relative z-50 mr-12 flex justify-center justify-items-end items-center hidden lg:block">
-            <img
-                class="h-60 w-60 drop-shadow-2xl drop-shadow-foundry-700 dark:drop-shadow-foundry-300"
-                src="/assets/logo-icon.png"
-                alt="The Foundry SMP"
-            />
+        <hgroup class="grow relative z-50 flex justify-center justify-items-end items-center hidden lg:block">
+            <div class="max-w-content">
+                <img
+                    class="drop-shadow-2xl drop-shadow-foundry-700 dark:drop-shadow-foundry-300"
+                    src="/assets/logo-icon.png"
+                    transform-images="avif webp jpg 256"
+                    alt="The Foundry SMP"
+                />
+            </div>
         </hgroup>
     </header>
 ));

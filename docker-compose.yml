@@ -10,4 +10,5 @@ services:
     ports: [ "8080:8080/tcp" ]
     command: tail -f /dev/null
     volumes: [ ".:/srv" ]
+    env_file: [ ".env" ]
     build: .
