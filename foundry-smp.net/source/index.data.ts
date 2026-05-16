@@ -1,4 +1,12 @@
-export default [
+export type VideoRecord = {
+    id: string;
+    release: Date;
+    creator: string;
+    title: string;
+    tags: string[];
+};
+
+export const VideoFeed: VideoRecord[] = [
     {
         id: "rci9bQHKtBc",
         release: new Date("Feb 7, 2026"),
@@ -48,4 +56,4 @@ export default [
         title: "Mining with the Create Mod WITHOUT Drills?",
         tags: [],
     },
-]
+];

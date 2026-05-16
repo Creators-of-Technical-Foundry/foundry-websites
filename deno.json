@@ -1,30 +1,35 @@
 {
-  "version": "0.1.0",
-  "name": "@foundry/engine",
-  "exports": "./source/index.ts",
+  "version": "0.2.0",
+  "name": "@foundry/preset",
+  "exports": "./preset/index.ts",
   "imports": {
+    "@std/path": "jsr:@std/path",
+    "@std/encoding/base32": "jsr:@std/encoding/base32",
     "@cloudflare/wrangler": "npm:wrangler@latest",
     "@qwik.dev/core": "npm:@qwik.dev/core@beta",
+    "@qwik.dev/optimizer": "npm:@qwik.dev/optimizer@beta",
+    "@qwik.dev/bundler/": "https://cdn.jsdelivr.net/gh/thejackshelton/qwik-bundler@0248707b9a5efdd4780b4d771b6183992143583c/src/",
+    "pathe": "npm:pathe@latest",
+    "rolldown": "npm:rolldown@latest",
+    "@thi.ng/dgraph": "npm:@thi.ng/dgraph@latest",
     "@lume/cli": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/cli.ts",
     "@lume/core": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/mod.ts",
+    "@lume/core/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/core/",
     "@lume/types": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/types.ts",
-    "@lume/jsx": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/jsx.ts",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
     "@lume/tailwindcss": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/tailwindcss.ts",
     "@lume/picture": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/picture.ts",
-    "@lume/transform-images": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/transform_images.ts",
-    "@lume/minify-html": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/minify_html.ts"
+    "@lume/transform-images": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/transform_images.ts"
   },
   "allowScripts": [
     "npm:esbuild@0.27.3",
     "npm:esbuild@0.28.0",
     "npm:sharp@0.34.5",
-    "npm:workerd@1.20260511.1"
+    "npm:workerd@1.20260515.1"
   ],
   "nodeModulesDir": "auto",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "lume",
+    "jsxImportSource": "@qwik.dev/core",
     "types": [
       "@lume/types"
     ],
@@ -39,12 +44,11 @@
     "indentWidth": 4,
     "lineWidth": 120,
     "exclude": [
-      "*.yml",
-      "**/*.yml"
+      "**/*.yml",
+      "*.yml"
     ]
   },
   "workspace": [
-    "./theme",
     "./foundry-smp.net"
   ]
 }
