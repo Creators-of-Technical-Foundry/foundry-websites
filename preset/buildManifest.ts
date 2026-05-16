@@ -12,6 +12,54 @@ import type {QwikChunk} from "./renderQwik.ts";
 export const QWIK_MANIFEST = 'globalThis.__QWIK_MANIFEST__';
 export const Q_MANIFEST_FILE = 'q-manifest.json';
 
+export interface QwikManifest {
+    /** Stable hash of the final manifest payload. */
+    manifestHash: string;
+    /** Metadata for each known QRL symbol. */
+    symbols: Record<string, QwikSymbol>;
+    /** Symbol name to bundle filename lookup. */
+    mapping: Record<string, string>;
+    /** JavaScript bundle metadata keyed by emitted filename. */
+    bundles: Record<string, QwikBundle>;
+    /** Non-JavaScript assets keyed by emitted filename. */
+    assets?: Record<string, QwikAsset>;
+    /** Compact runtime preload graph. */
+    bundleGraph?: QwikBundleGraph;
+    /** Emitted asset filename for the serialized bundle graph. */
+    bundleGraphAsset?: string;
+    /** Emitted Qwik preloader bundle filename when detected. */
+    preloader?: string;
+    /** Emitted Qwik core bundle filename when detected. */
+    core?: string;
+    /** Emitted qwikloader bundle filename, when detected. */
+    qwikLoader?: string;
+    /** Global HTML tags requested by runtime integrations. */
+    injections?: GlobalInjections[];
+    /** Manifest schema version. */
+    version: string;
+}
+
+/** HTML tags that Qwik runtime integrations should inject globally. */
+export type GlobalInjections = {
+    /** HTML tag name to inject. */
+    tag: string;
+    /** HTML attributes for the injected tag. */
+    attributes?: Record<string, string>;
+    /** Document location for the injected tag. */
+    location: 'head' | 'body';
+};
+
+/** Compact preload graph format consumed by Qwik's runtime preloader. */
+export type QwikBundleGraph = Array<string | number>;
+
+/** Non-JavaScript asset metadata emitted alongside the manifest. */
+export type QwikAsset = {
+    /** Original asset name when provided by the bundler. */
+    name: string | undefined;
+    /** Emitted asset size in bytes. */
+    size: number;
+};
+
 const HANDLERS = [
     '_chk',
     '_rsc',
@@ -19,17 +67,20 @@ const HANDLERS = [
     '_run',
     '_task',
     '_val',
+    // Each
     '_eaC',
     '_eaT',
+    // Suspense
     '_suC',
     '_suT',
+    // Reveal
     '_reR',
     '_reC',
     '_reT',
-];
+] as const;
 
 const HANDLER_SET = new Set(HANDLERS);
-const FUNCTION_INTERACTIVITY: Record<string, number> = {
+const FUNCTION_INTERACTIVITY = {
     component$: 2,
     useStyles$: 2,
     useStylesScoped$: 2,
@@ -41,7 +92,7 @@ const FUNCTION_INTERACTIVITY: Record<string, number> = {
     useOn: 3,
     useOnDocument: 3,
     useOnWindow: 3,
-};
+} as const;
 
 
 export function createManifest(
@@ -73,14 +124,6 @@ export function createManifest(
                 manifest.mapping[name] = bundleFileName;
             }
         }
-
-        // if (item.moduleIds.some((id) => QWIK_LIBRARY_MODULE_RE.test(id))) {
-        //     for (const name of findLibraryQrlSymbols(item.code)) {
-        //         if (!segments.has(name) && !manifest.mapping[name]) {
-        //             manifest.mapping[name] = bundleFileName;
-        //         }
-        //     }
-        // }
 
         for (const name of item.exports.filter((name: string) => HANDLER_SET.has(name))) {
             manifest.mapping[name] = bundleFileName;
@@ -155,7 +198,7 @@ export function createManifest(
 }
 
 function handlerSymbol(symbol: string): QwikSymbol {
-    return { origin: 'Qwik core', displayName: symbol, hash: symbol };
+    return { origin: '@qwik.dev/core', displayName: symbol, hash: symbol };
 }
 
 function mapBundleNames(

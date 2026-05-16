@@ -7,15 +7,14 @@ import { dirname } from "@std/path";
 import type Site from "@lume/core/site.ts";
 import type { Engine, Helper } from "@lume/core/renderer.ts";
 
-import type { SymbolMapper } from "@qwik.dev/core/optimizer";
 import type { SegmentAnalysis, TransformModule, TransformOutput } from "@qwik.dev/optimizer";
 import { createOptimizer } from "@qwik.dev/optimizer";
 
 import type { JSX, JSXOutput } from "@qwik.dev/core";
 import { jsx } from "@qwik.dev/core";
-
-import type { QwikManifest } from "@qwik.dev/bundler/types.ts";
 import { Q_BUILD_DIR, Q_BUNDLE_GRAPH } from "@qwik.dev/bundler/build/chunking.ts";
+
+import type { QwikManifest } from "./buildManifest.ts";
 import { createManifest, Q_MANIFEST_FILE } from "./buildManifest.ts";
 
 import { renderToString } from "@qwik.dev/core/server";
@@ -94,7 +93,6 @@ export class QwikCompiler {
             .digest("SHA-1", new TextEncoder().encode(module.path));
         return encodeBase32(new Uint8Array(buffer))
             .replaceAll("=", "") // strip base32 padding
-            .toLowerCase() // filename-friendly
             .slice(0, 11);
     }
 
@@ -156,10 +154,33 @@ export class QwikCompiler {
         this.compiled.set(pageSourceFile, result);
         this.compiled.set(layoutSourceFile, result);
 
-        // console.log("compile(page)", {
-        //     page,
-        //     result,
-        // });
+        // if (!this.compiled.has('qwik:handlers')) {
+        //     built.set('qwik:handlers', {
+        //         type: "chunk",
+        //         id: "handlers",
+        //         fileName: "build/q-handlers.js",
+        //         code: `export { _chk, _rsc, _res, _run, _task, _val, _eaC, _eaT, _suC, _suT } from "@qwik.dev/core/handlers.mjs";`,
+        //         moduleIds: [],
+        //         dynamicImports: [],
+        //         imports: [],
+        //         exports: [],
+        //     })
+        //     this.compiled.set('qwik:handlers', result);
+        // }
+        //
+        if (!this.compiled.has("qwik:preloader")) {
+            built.set("qwik:preloader", {
+                type: "chunk",
+                id: "handlers",
+                fileName: "build/q-preloader.js",
+                code: `export { g, l, p } from "@qwik.dev/core/preloader";`,
+                moduleIds: [],
+                dynamicImports: [],
+                imports: [],
+                exports: [],
+            });
+            this.compiled.set("qwik:preloader", result);
+        }
 
         for (const module of result.modules) {
             if (!module.segment) continue; // primary tossed, segments kept
@@ -186,15 +207,11 @@ export class QwikCompiler {
         }
 
         this.mergedManifest = this.manifests.reduce((merged, x) => merge(merged, x), {}) as QwikManifest;
-        (globalThis as any).__QWIK_MANIFEST__ = JSON.parse(
-            JSON.stringify(this.mergedManifest)
-            .replaceAll(/"\/?build\//, `"${this.buildPath}/build/`),
-        );
-        console.log("Manifest Resolved", {
-            manifests: this.manifests.length,
-            mergedManifest: this.mergedManifest,
-            GLOBAL: (globalThis as any).__QWIK_MANIFEST__,
-        });
+        globalThis.__QWIK_MANIFEST__ = this.mergedManifest;
+        // (globalThis as any).__QWIK_MANIFEST__ = JSON.parse(
+        //     JSON.stringify(this.mergedManifest)
+        //         .replaceAll(/"\/?build\//g, `"${this.buildPath}/build/`),
+        // );
 
         for (
             const [fileName, source] of [
@@ -202,10 +219,10 @@ export class QwikCompiler {
                 [Q_MANIFEST_FILE, JSON.stringify(this.mergedManifest, null, "\t")],
             ] as const
         ) {
-            built.set(`/${fileName}`, {
+            built.set(fileName, {
                 type: "chunk",
                 id: fileName,
-                fileName: `/${fileName}`,
+                fileName,
                 code: source,
                 moduleIds: [],
                 imports: [],
@@ -215,8 +232,7 @@ export class QwikCompiler {
         }
 
         for (const chunk of built.values()) {
-            const buildFile = `${this.buildPath}${chunk.fileName}`;
-            console.log("Writing file", buildFile);
+            const buildFile = `${this.buildPath}/${chunk.fileName}`;
             await Deno.mkdir(dirname(buildFile), { recursive: true });
             await Deno.writeTextFile(buildFile, chunk.code);
         }
@@ -243,46 +259,39 @@ export class QwikEngine implements Engine {
         if (typeof source === "string") return source;
 
         await this.compiler.compile(data.page);
-
         // When no children exist, then it is a leaf node that does not need to be rendered
         if (children == undefined) return source;
 
-        await this.compiler.compile(data.page);
+        const manifest = this.compiler.mergedManifest;
+        const renderOpts = {
+            containerTagName: "html",
+            manifest,
+        };
 
-        // console.log("QwikEngine.render()", {
-        //     cwd: Deno.cwd(),
-        //     content,
-        //     source,
-        //     manifest,
-        // });
-
-        const render = await renderToString(
-            jsx(source, data, children),
-            {
-                containerTagName: "html",
-                symbolMapper: (
-                    symbolName: string,
-                    mapper: SymbolMapper | undefined,
-                    parent?: string,
-                ): [symbol: string, chunk: string] | undefined => {
-                    console.log("symbolMapper(symbolName, mapper, parent)", {
-                        symbolName,
-                        mapper,
-                        parent,
-                    });
-
-                    return undefined;
-                },
-            },
-        );
-
+        const jsxChildren = jsx(children, data, null, true);
+        // const inlineContent = inlinedQrl(jsxChildren, 's1');
+        // const renderedChildren = (await renderToString(jsxChildren, { ...renderOpts, containerTagName: 'div' }))
+        const varProps = { ...data, content: jsxChildren };
         console.log("QwikEngine.render()", {
-            cwd: Deno.cwd(),
-            source,
-            html: render.html,
+            global: globalThis.__QWIK_MANIFEST__,
+            manifest,
         });
 
-        return render.html;
+        const render = await renderToString(
+            jsx(source, varProps, null, true),
+            renderOpts,
+        );
+
+        const [head, body] = render.html.split("</head>");
+        const appendHead = [
+            // `<link rel="preload" href="/${manifest?.bundleGraphAsset}" as="fetch" crossorigin="anonymous" />`,
+            // `<script type="module" async crossorigin="anonymous">
+            //     let b=fetch(${JSON.stringify(`/${manifest?.bundleGraphAsset}`)});
+            //     import(${JSON.stringify("/build/q-preloader.js")}).then(({l})=>l(${JSON.stringify("/build")},b));
+            // </script>`,
+        ];
+
+        return [head, ...appendHead, "</head>", body].join("\n");
     }
 
     addHelper(name: string, fn: Helper) {
@@ -328,15 +337,15 @@ export function qwik(userOptions?: Options) {
 
 export default qwik;
 
-/** Extends Data interface */
-// declare global {
-//     namespace Lume {
-//         export interface Data {
-//             /**
-//              * The JSX children elements
-//              * @see https://lume.land/plugins/jsx/
-//              */
-//             children?: JSX.Element[] | JSX.Element;
-//         }
-//     }
-// }
+/** Extends globally available types */
+declare global {
+    // noinspection ES6ConvertVarToLetConst - Required to be `var` for type compatibility
+    var __QWIK_MANIFEST__: QwikManifest | undefined;
+
+    namespace Lume {
+        export interface Data {
+            children?: JSX.Element[] | JSX.Element;
+            content?: JSXOutput;
+        }
+    }
+}
