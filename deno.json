@@ -1,50 +1,55 @@
 {
-  "version": "0.1.0",
-  "name": "@foundry/engine",
-  "exports": "./source/index.ts",
-  "imports": {
-    "@cloudflare/wrangler": "npm:wrangler@latest",
-    "@qwik.dev/core": "npm:@qwik.dev/core@beta",
-    "@lume/cli": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/cli.ts",
-    "@lume/core": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/mod.ts",
-    "@lume/types": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/types.ts",
-    "@lume/jsx": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/jsx.ts",
-    "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.14/jsx-runtime.ts",
-    "@lume/tailwindcss": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/tailwindcss.ts",
-    "@lume/picture": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/picture.ts",
-    "@lume/transform-images": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/transform_images.ts",
-    "@lume/minify-html": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/minify_html.ts"
-  },
-  "allowScripts": [
-    "npm:esbuild@0.27.3",
-    "npm:esbuild@0.28.0",
-    "npm:sharp@0.34.5",
-    "npm:workerd@1.20260511.1"
-  ],
-  "nodeModulesDir": "auto",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "lume",
-    "types": [
-      "@lume/types"
+    "version": "0.2.0",
+    "name": "@foundry/preset",
+    "exports": "./preset/index.ts",
+    "imports": {
+        "@cloudflare/wrangler": "npm:wrangler@latest",
+        "@qwik.dev/core": "npm:@qwik.dev/core@latest",
+        "@qwik.dev/optimizer": "npm:@qwik.dev/optimizer@latest",
+        "@qwik.dev/bundler/": "https://cdn.jsdelivr.net/gh/thejackshelton/qwik-bundler@0248707b9a5efdd4780b4d771b6183992143583c/src/",
+        "@thi.ng/dgraph": "npm:@thi.ng/dgraph@latest",
+        "ufo": "npm:ufo@latest",
+        "pathe": "npm:pathe@latest",
+        "rolldown": "npm:rolldown@latest",
+        "@deno/rolldown-plugin": "jsr:@deno/rolldown-plugin",
+        "@lume/cli": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/cli.ts",
+        "@lume/core": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/mod.ts",
+        "@lume/core/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/core/",
+        "@lume/types": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/types.ts",
+        "@lume/tailwindcss": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/tailwindcss.ts",
+        "@tailwindcss/merge": "npm:tailwind-merge@latest",
+        "@lume/picture": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/picture.ts",
+        "@lume/transform-images": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/plugins/transform_images.ts"
+    },
+    "allowScripts": [
+        "npm:esbuild@0.27.3",
+        "npm:esbuild@0.28.0",
+        "npm:sharp@0.34.5",
+        "npm:workerd@1.20260515.1"
     ],
-    "lib": [
-      "dom",
-      "dom.asynciterable",
-      "dom.iterable",
-      "deno.ns"
+    "nodeModulesDir": "auto",
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "@qwik.dev/core",
+        "types": [
+            "@lume/types"
+        ],
+        "lib": [
+            "dom",
+            "dom.asynciterable",
+            "dom.iterable",
+            "deno.ns"
+        ]
+    },
+    "fmt": {
+        "indentWidth": 4,
+        "lineWidth": 120,
+        "exclude": [
+            "**/*.yml",
+            "*.yml"
+        ]
+    },
+    "workspace": [
+        "./foundry-smp.net"
     ]
-  },
-  "fmt": {
-    "indentWidth": 4,
-    "lineWidth": 120,
-    "exclude": [
-      "*.yml",
-      "**/*.yml"
-    ]
-  },
-  "workspace": [
-    "./theme",
-    "./foundry-smp.net"
-  ]
 }

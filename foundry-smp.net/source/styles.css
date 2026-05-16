@@ -1,3 +1,50 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fdb3fe59ce6dbf93726bdd9d0c795285d3d7991dc2c4430a1e8c6a63fb9e7236
-size 1373
+@import "tailwindcss";
+
+@source "../../theme/**/*.{ts,tsx}";
+@source "./**/*.{ts,tsx}";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"]::before, [data-theme="dark"] *));
+
+@theme {
+    --color-blueprint-50: #0b1318;
+    --color-blueprint-100: #45c6ff; /* #17262f; */
+    --color-blueprint-200: #a053fe; /* #223847; */
+    --color-blueprint-300: #395e77;
+    --color-blueprint-400: #4f84a6;
+    --color-blueprint-500: #71bced;
+    --color-blueprint-600: #9cd0f2;
+    --color-blueprint-700: #b8def6;
+    --color-blueprint-800: #d4ebfa;
+    --color-blueprint-900: #e3f2fb;
+    --color-blueprint-950: #f1f8fd;
+
+    --color-foundry-50: #191107;
+    --color-foundry-100: #33220d;
+    --color-foundry-200: #4c3214;
+    --color-foundry-300: #65431a;
+    --color-foundry-400: #b1762e;
+    --color-foundry-500: #fda842;
+    --color-foundry-600: #fdb968;
+    --color-foundry-700: #fecb8e;
+    --color-foundry-800: #fed4a1;
+    --color-foundry-900: #fedcb3;
+    --color-foundry-950: #ffeed9;
+}
+
+body {
+    @apply w-full min-h-screen p-0 m-0;
+    @apply bg-blueprint-900 dark:bg-blueprint-50 text-blueprint-100 dark:text-blueprint-900;
+    @apply overflow-y-scroll;
+}
+
+body::before {
+    @apply bg-linear-to-br from-blueprint-300 to-transparent to-60% blur-3xl;
+    content: " ";
+    display: block;
+    position: fixed;
+    z-index: -1;
+    top: -50px;
+    right: 0;
+    left: -300px;
+    height: 500px;
+}

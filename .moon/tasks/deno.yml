@@ -3,16 +3,16 @@ $schema: "https://moonrepo.dev/schemas/tasks.json"
 implicitInputs:
   - "assets/**/*"
   - "assets/*"
-  - "source/**/*"
-  - "source/*"
+  - "preset/**/*"
+  - "preset/*"
 
 tasks:
   fmt:
     extends: "exec"
     args: deno fmt
   install:
-    inputs: [ "deno.json", "deno.lock" ]
     extends: "exec"
+    inputs: [ "deno.json", "deno.lock" ]
     args: deno install
   dev:
     extends: "exec"
