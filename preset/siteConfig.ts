@@ -2,7 +2,7 @@ import lume from "@lume/core";
 import tailwindcss from "@lume/tailwindcss";
 import picture from "@lume/picture";
 import transformImages from "@lume/transform-images";
-import qwik from "./renderQwik.ts";
+import qwik from "./renderQwik.tsx";
 
 export type SiteConfig = {
     domain?: string;

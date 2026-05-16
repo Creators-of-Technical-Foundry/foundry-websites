@@ -1,6 +1,6 @@
 import { component$, Slot } from "@qwik.dev/core";
 
-export default component$<Lume.Data>(function Layout({ title, domain, url, content }) {
+export default component$<Lume.Data>(function Layout({ title, domain, url }) {
     console.log("layout.tsx is now rendering!");
 
     return (
@@ -14,9 +14,9 @@ export default component$<Lume.Data>(function Layout({ title, domain, url, conte
                 <link rel="stylesheet" href="/styles.css" />
                 <link rel="canonical" href={url} />
             </head>
-            <body data-theme="dark">
-            {content}
+            <body data-theme="light">
+                <Slot />
             </body>
         </>
-    )
+    );
 });

@@ -7,8 +7,8 @@
 
 @theme {
     --color-blueprint-50: #0b1318;
-    --color-blueprint-100: #17262f;
-    --color-blueprint-200: #223847;
+    --color-blueprint-100: #45c6ff; /* #17262f; */
+    --color-blueprint-200: #a053fe; /* #223847; */
     --color-blueprint-300: #395e77;
     --color-blueprint-400: #4f84a6;
     --color-blueprint-500: #71bced;
@@ -33,7 +33,7 @@
 
 body {
     @apply w-full min-h-screen p-0 m-0;
-    @apply bg-stone-200 dark:bg-stone-900 text-blueprint-100 dark:text-blueprint-900;
+    @apply bg-blueprint-900 dark:bg-blueprint-50 text-blueprint-100 dark:text-blueprint-900;
     @apply overflow-y-scroll;
 }
 
